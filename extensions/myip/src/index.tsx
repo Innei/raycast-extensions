@@ -18,15 +18,6 @@ const networkEntires = Object.entries(networkInterfaces).filter(
 
 const list = networkEntires
   .map(([k, v]) => {
-    console.log(
-      Array.from(
-        v
-          ?.flat()
-          .reduce((acc, { mac }) => acc.add(mac), new Set())
-          .values() || [],
-      ).join(', '),
-    )
-
     return {
       interface$: k,
       addresses: v?.flat().map(({ address }) => address),
