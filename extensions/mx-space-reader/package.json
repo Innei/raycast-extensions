@@ -1,0 +1,52 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "mx-space-reader",
+  "title": "mx-space-reader",
+  "description": "Read post from Mix Space.",
+  "icon": "command-icon.png",
+  "author": "Innei",
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "list-posts",
+      "title": "List Posts",
+      "subtitle": "Mix Space",
+      "description": "List posts from Mix Space",
+      "mode": "view"
+    },
+    {
+      "name": "add-mix-space-server",
+      "title": "Add Mix Space Server",
+      "subtitle": "Mix Space",
+      "description": "",
+      "mode": "view"
+    },
+    {
+      "name": "list-stored-mix-space-server",
+      "title": "List Stored Site",
+      "subtitle": "Mix Space",
+      "description": "",
+      "mode": "view"
+    }
+  ],
+  "dependencies": {
+    "@mx-space/api-client": "0.6.0",
+    "@raycast/api": "^1.27.1",
+    "axios": "0.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "16.10.0",
+    "@types/react": "17.0.28",
+    "@innei-util/eslint-react-ts": "0.1.2",
+    "eslint": "*",
+    "typescript": "4.4.3",
+    "@innei-util/prettier": "0.2.0",
+    "prettier": "2.5.1"
+  },
+  "scripts": {
+    "build": "ray build -e dist",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint"
+  }
+}
