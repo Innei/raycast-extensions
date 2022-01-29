@@ -9,7 +9,7 @@
   "commands": [
     {
       "name": "index",
-      "subtitle": "Display local IP and external IP infomation",
+      "subtitle": "IP Info",
       "title": "Show IP Info",
       "description": "Display local IP and external IP infomation",
       "mode": "view"

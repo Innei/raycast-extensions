@@ -8,9 +8,11 @@ import {
   setLocalStorageItem,
   showToast,
   ToastStyle,
+  useNavigation,
 } from '@raycast/api'
 import axios from 'axios'
 import { FC, useEffect, useState } from 'react'
+import { ListSitePost } from './components/list-site-post'
 import { StorageServerKey, ua } from './constants'
 
 export const FetchSiteDetail: FC<{ apiUrl: string }> = (props) => {
@@ -44,6 +46,8 @@ export const FetchSiteDetail: FC<{ apiUrl: string }> = (props) => {
         setLoading(false)
       })
   }, [props.apiUrl])
+
+  const nav = useNavigation()
   return (
     <Detail
       isLoading={loading}
@@ -78,6 +82,7 @@ export const FetchSiteDetail: FC<{ apiUrl: string }> = (props) => {
                 StorageServerKey,
                 JSON.stringify([...list, props.apiUrl]),
               )
+              nav.push(<ListSitePost apiUrl={props.apiUrl} />)
             }}
           ></ActionPanelItem>
         </ActionPanel>

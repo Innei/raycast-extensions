@@ -1,4 +1,4 @@
-import { AggregateRoot } from '@mx-space/api-client'
+import { AggregateRoot, camelcaseKeys } from '@mx-space/api-client'
 import {
   ActionPanel,
   ActionPanelItem,
@@ -10,7 +10,6 @@ import {
   setLocalStorageItem,
   showToast,
   ToastStyle,
-  useNavigation,
 } from '@raycast/api'
 import axios from 'axios'
 import { FC, useEffect, useState } from 'react'
@@ -33,7 +32,7 @@ export const ListStoredServer: FC = () => {
         await Promise.all(
           list.map(async (url) => {
             const detail = await fetchAggregate(url)
-            setDetails({ ...details, [url]: detail })
+            setDetails((details) => ({ ...details, [url]: detail }))
           }),
         )
         seLoading(false)
@@ -44,6 +43,7 @@ export const ListStoredServer: FC = () => {
     if (!url) {
       return
     }
+
     const $http = axios.create({
       baseURL: url,
       headers: {
@@ -54,16 +54,17 @@ export const ListStoredServer: FC = () => {
     return $http
       .get('/aggregate')
       .then((data) => data.data)
+      .then((data) => camelcaseKeys(data, { deep: true }))
       .catch((err) => {
         showToast(ToastStyle.Failure, '获取站点信息失败, URL: ' + url)
       })
   }
-  const nav = useNavigation()
+
   return (
     <List isLoading={loading}>
       {list.map((url) => (
         <List.Item
-          accessoryTitle={url}
+          accessoryTitle={details[url]?.url.webUrl ?? url}
           title={details[url]?.seo.title || ''}
           key={url}
           actions={
